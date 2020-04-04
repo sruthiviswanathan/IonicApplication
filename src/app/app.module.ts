@@ -9,6 +9,22 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { VideoPlayer } from '@ionic-native/video-player/ngx';
+
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+
+const googleOAuthClientId = '870041608057-tki4ob4n7eun541j202l7aph1fpji4ta.apps.googleusercontent.com';
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider(googleOAuthClientId)
+  }
+]);
+ 
+export function provideConfig() {
+  return config;
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,11 +34,14 @@ import { AppRoutingModule } from './app-routing.module';
      FormsModule,
      ReactiveFormsModule, 
      IonicModule.forRoot(),
-     AppRoutingModule],
+     AppRoutingModule,
+     SocialLoginModule],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: AuthServiceConfig, useFactory: provideConfig },
+    VideoPlayer
   ],
   bootstrap: [AppComponent]
 })

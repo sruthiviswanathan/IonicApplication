@@ -1,0 +1,15 @@
+<ion-toolbar color="success">
+  <ion-title>Pinch of Yum</ion-title>
+    <ion-chip slot="end">
+      <ion-avatar>
+        <img src="{{ userPhoto }}">
+      </ion-avatar>
+      <ion-label>{{ userName }}</ion-label>
+    </ion-chip>
+    <ion-buttons slot="end">
+      <ion-button fill="outline" color="light">About</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button fill="solid" color="medium" (click)="signOut()"> <ion-icon slot="start" name="log-out-outline"></ion-icon>Sign Out</ion-button>
+    </ion-buttons>
+</ion-toolbar>
