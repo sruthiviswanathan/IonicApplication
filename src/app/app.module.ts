@@ -21,7 +21,7 @@ let config = new AuthServiceConfig([
     provider: new GoogleLoginProvider(googleOAuthClientId)
   }
 ]);
- 
+
 export function provideConfig() {
   return config;
 }

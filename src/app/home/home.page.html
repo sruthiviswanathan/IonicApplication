@@ -1,20 +1,22 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Pinch of Yum
-    </ion-title>
+    <ion-title color="success">Pinch of Yum</ion-title>
+  <ion-buttons slot="end">
+    <ion-button fill="solid" color="success" (click)="signInWithGoogle('google')"><ion-icon slot="start" name="logo-google"></ion-icon>Sign In With Google</ion-button>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Pinch of Yum</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content fullscreen class="ion-padding">
+<ion-slides pager=true [options]="slideOpts">
+  <ion-slide>
+    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
+  </ion-slide>
+  <ion-slide>
+    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
+  </ion-slide>
+  <ion-slide>
+    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
+  </ion-slide>
+</ion-slides>
 </ion-content>

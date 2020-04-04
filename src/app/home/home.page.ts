@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import { AuthService } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
+import { Router } from '@angular/router';
+import {AlertController} from '@ionic/angular';
+import { VideoPlayer } from '@ionic-native/video-player/ngx';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +12,48 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400
+  };
 
+  user:any
+
+  constructor(private authService: AuthService,
+    private router: Router, private alertController: AlertController,
+    private videoPlayer: VideoPlayer) {}
+
+  async signInWithGoogle() {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((response) => {
+        this.user = response;
+        localStorage.setItem('USER', JSON.stringify(this.user));
+        this.presentAlert();
+    })
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Welcome to Pinch of Yum!',
+      subHeader: 'Continue as ' + this.user.firstName,
+      message: `<ion-thumbnail slot="end"><ion-img src="${this.user.photoUrl}" alt="userpic" style="border-radius: 2px"></ion-img></ion-thumbnail>`,
+      buttons: [
+        {
+          text: 'CANCEL',
+          role: 'cancel',
+          cssClass: 'danger',
+          handler: () => {
+            console.log('Confirm Cancel!!');
+          }
+        }, {
+          text: 'OK',
+          handler: () => {
+            console.log('Confirm OK!!');
+            this.router.navigateByUrl('dashboard');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }
