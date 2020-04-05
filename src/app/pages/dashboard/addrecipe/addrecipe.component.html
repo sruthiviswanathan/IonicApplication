@@ -1,0 +1,31 @@
+<ion-content>
+  <form>
+    <ion-list lines="full" class="ion-margin ion-padding">
+      <!--Name of the recipe-->
+      <ion-item>
+        <ion-label position="floating">Name of the recipe<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text"></ion-input>
+      </ion-item>
+
+      <!--TODO-->
+      <!--Upload pictures-->
+
+      <!--Ingredients required-->
+      <ion-item>
+        <ion-label position="floating">Ingredients Required<ion-text color="danger">*</ion-text></ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+
+      <!--Method of preparation-->
+      <ion-item>
+        <ion-label position="floating">Method of Preparation<ion-text color="danger">*</ion-text></ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" (click)="addNewRecipe()" color="success" class="ion-margin">ADD RECIPE</ion-button>
+    </div>
+  </form>
+</ion-content>

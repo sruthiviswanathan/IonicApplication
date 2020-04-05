@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardPage } from './dashboard.page';
 import { RecipeComponent } from './recipe/recipe.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { AddrecipeComponent } from './addrecipe/addrecipe.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path: 'recipe',
     component: RecipeComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'addrecipe',
+    component: AddrecipeComponent,
     canActivate: [AuthGuard]
   }
 ];

@@ -9,6 +9,7 @@ import { DashboardPageRoutingModule } from './dashboard-routing.module';
 import { DashboardPage } from './dashboard.page';
 import {CommonheaderComponent} from '../../components/commonheader/commonheader.component';
 import { RecipeComponent} from '../dashboard/recipe/recipe.component'
+import { AddrecipeComponent } from './addrecipe/addrecipe.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { RecipeComponent} from '../dashboard/recipe/recipe.component'
   declarations: [
     DashboardPage,
     CommonheaderComponent,
-    RecipeComponent
+    RecipeComponent,
+    AddrecipeComponent
   ]
 })
 export class DashboardPageModule {}
