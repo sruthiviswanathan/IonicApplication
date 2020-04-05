@@ -31,6 +31,15 @@ export class HomePage {
     })
   }
 
+  goToPage() {
+    if(this.user) {
+      this.router.navigateByUrl('dashboard');
+    } else {
+      this.signInWithGoogle();
+      this.router.navigateByUrl('/');      
+    }
+}
+
   async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Welcome to Pinch of Yum!',
