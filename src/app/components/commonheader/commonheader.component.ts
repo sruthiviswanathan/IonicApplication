@@ -20,7 +20,7 @@ export class CommonheaderComponent implements OnInit {
 
   signOut() {
     this.authService.signOut().then((response) => {
-      localStorage.removeItem('USER');
+      localStorage.clear();
       this.router.navigateByUrl('/home');
     });
   }

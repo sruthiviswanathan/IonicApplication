@@ -9,9 +9,11 @@ import {CommonheaderComponent} from '../../components/commonheader/commonheader.
 })
 export class DashboardPage implements OnInit {
 
+  isAdminLoggedIn: string;
   constructor(private router: Router) { }
   
   ngOnInit() {
+    this.isAdminLoggedIn = localStorage.getItem('ADMIN');
   }
   goToRecipePage() {
     this.router.navigateByUrl('dashboard/recipe')
