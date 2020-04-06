@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-
+import { PhotoService } from '../../../services/photo.service';
 @Component({
   selector: 'app-addrecipe',
   templateUrl: './addrecipe.component.html',
@@ -8,9 +8,14 @@ import { ModalController } from '@ionic/angular';
 })
 export class AddrecipeComponent implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  photos: any;
 
-  ngOnInit() {}
+  constructor(private modalController: ModalController,
+    public photoService: PhotoService) { }
+
+  ngOnInit() {
+    
+  }
 
   closeModal() {
     this.modalController.dismiss();
@@ -18,6 +23,13 @@ export class AddrecipeComponent implements OnInit {
   addNewRecipe() {
     console.log('Inside add new recipe function');
     // fetch new recipe value.
+  }
+  reset() {
+    console.log('Inside reset');
+    // fetch new recipe value.
+  }
+  takeAPicture() {
+    this.photoService.takeNewPhotoAndAddToGallery();
   }
 
 }

@@ -1,14 +1,40 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Add a New Recipe</ion-title>
+      <ion-buttons slot="end">
+        <ion-button color="dark" (click)="closeModal()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
+  
+  <ion-grid>
+    <ion-row>
+    <ion-col size="6" 
+      *ngFor="let photo of photoService.photos; index as position">
+    <ion-img src="{{ photo.base64 ? photo.base64 : photo.webviewPath }}"></ion-img>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <form>
+     <!--Upload pictures-->
+     <div class="ion-padding ion-margin">
+      <ion-fab vertical="top" horizontal="center" slot="fixed">
+        <ion-fab-button color="success" (click)="takeAPicture()">
+          <ion-icon name="camera"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+     </div>
+  
+    <div class="ion-margin">
     <ion-list lines="full" class="ion-margin ion-padding">
       <!--Name of the recipe-->
       <ion-item>
         <ion-label position="floating">Name of the recipe<ion-text color="danger">*</ion-text></ion-label>
         <ion-input required type="text"></ion-input>
       </ion-item>
-
-      <!--TODO-->
-      <!--Upload pictures-->
 
       <!--Ingredients required-->
       <ion-item>
@@ -21,11 +47,12 @@
         <ion-label position="floating">Method of Preparation<ion-text color="danger">*</ion-text></ion-label>
         <ion-textarea></ion-textarea>
       </ion-item>
-
     </ion-list>
+    </div>
 
-    <div class="ion-padding">
-      <ion-button expand="block" (click)="addNewRecipe()" color="success" class="ion-margin">ADD RECIPE</ion-button>
+    <div class="ion-padding ion-margin">
+      <ion-button (click)="addNewRecipe()" color="success" class="ion-margin">ADD RECIPE</ion-button>
+      <ion-button (click)="reset()" color="danger" class="ion-margin">CLEAR</ion-button>
     </div>
   </form>
 </ion-content>
