@@ -13,7 +13,7 @@
     <ion-row>
     <ion-col size="6" 
       *ngFor="let photo of photoService.photos; index as position">
-    <ion-img src="{{ photo.base64 ? photo.base64 : photo.webviewPath }}"></ion-img>
+    <ion-img src="{{ photo.base64 ? photo.base64 : photo.webviewPath }}" (click)="showActionSheet(photo, position)"></ion-img>
     </ion-col>
     </ion-row>
   </ion-grid>
@@ -28,6 +28,7 @@
       </ion-fab>
      </div>
   
+     <ion-note class="upload-label" class="ion-margin ion-padding" color="success">Upload pictures of your Recipe<ion-text color="danger">*</ion-text></ion-note>
     <div class="ion-margin">
     <ion-list lines="full" class="ion-margin ion-padding">
       <!--Name of the recipe-->
