@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { Router } from '@angular/router';
-import {AlertController} from '@ionic/angular';
+import {AlertController, ModalController} from '@ionic/angular';
 import { VideoPlayer } from '@ionic-native/video-player/ngx';
 
 @Component({
@@ -21,7 +21,7 @@ export class HomePage {
 
   constructor(private authService: AuthService,
     private router: Router, private alertController: AlertController,
-    private videoPlayer: VideoPlayer) {}
+    private videoPlayer: VideoPlayer, private modalController: ModalController) {}
 
   async signInWithGoogle() {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((response) => {
@@ -33,6 +33,14 @@ export class HomePage {
         }
         this.presentAlert();
     })
+  }
+
+  signInWithPinchOfYum() {
+    this.router.navigateByUrl('register');
+  }
+
+  login() {
+    this.router.navigateByUrl('login');
   }
 
   goToPage() {

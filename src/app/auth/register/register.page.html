@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Sign In to Pinch of Yum</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="register(form)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-xs="12" size-md="6" offset-md="3">
+          <!-- <div class="text-align-center">
+            <ion-img style="width: 120px; height: 150px;" src="https://cdn.dribbble.com/users/60266/screenshots/10867818/media/c7213f273c48f06b67babccf3497c4c4.jpg"></ion-img>
+          </div> -->
+          <div class="ion-margin ion-padding">
+            <ion-item>
+              <ion-label position="floating">Your Name<ion-text color="danger">*</ion-text></ion-label>
+              <ion-input  name="name" type="text" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Your Email<ion-text color="danger">*</ion-text></ion-label>
+              <ion-input name="email" type="email" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Password<ion-text color="danger">*</ion-text></ion-label>
+              <ion-input name="password" type="password" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Confirm Password<ion-text color="danger">*</ion-text></ion-label>
+              <ion-input name="confirm" type="password" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div class="ion-margin ion-padding">
+            <ion-button color="success" type="submit" expand="block">Sign Up<ion-icon name="restaurant-outline" slot="end"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
