@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -8,13 +10,22 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterPage implements OnInit {
 
-  constructor() { }
+  constructor(private authf: AngularFireAuth, private router: Router) { }
+  user: any;
 
   ngOnInit() {
   }
 
-  register(form: NgForm) {
-    console.log('details', form.value);
+  async register(form: NgForm) {
+    await this.authf.auth.createUserWithEmailAndPassword(form.value.email, form.value.password)
+    .then((response) => {
+      this.user = response.user;
+      localStorage.setItem('USER', this.user);
+      this.router.navigateByUrl('/dashboard');
+    }).catch((error) => {
+      // console.log(error);
+      this.router.navigateByUrl('/');
+    });
   }
 
 }

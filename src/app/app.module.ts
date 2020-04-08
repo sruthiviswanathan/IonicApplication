@@ -3,6 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+import { AngularFireModule } from 'angularfire2';
+
+// import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+
+import { environment } from '../environments/environment';
+
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -34,8 +42,12 @@ export function provideConfig() {
      FormsModule,
      ReactiveFormsModule, 
      IonicModule.forRoot(),
+     AngularFireModule.initializeApp(environment.firebase),
+     AngularFireDatabaseModule,
+     AngularFireAuthModule,
      AppRoutingModule,
-     SocialLoginModule],
+     SocialLoginModule
+     ],
   providers: [
     StatusBar,
     SplashScreen,
