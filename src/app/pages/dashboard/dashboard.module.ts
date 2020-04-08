@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { DashboardPageRoutingModule } from './dashboard-routing.module';
+import { FileUploadModule } from 'ng2-file-upload';
+
 
 import { DashboardPage } from './dashboard.page';
 import {CommonheaderComponent} from '../../components/commonheader/commonheader.component';
@@ -16,7 +18,8 @@ import { AddrecipeComponent } from './addrecipe/addrecipe.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    DashboardPageRoutingModule
+    DashboardPageRoutingModule,
+    FileUploadModule
   ],
   declarations: [
     DashboardPage,

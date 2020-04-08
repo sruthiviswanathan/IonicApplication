@@ -3,6 +3,9 @@ import { ModalController } from '@ionic/angular';
 import { PhotoService } from '../../../services/photo.service';
 import { ActionSheetController } from '@ionic/angular';
 
+import { FileUploader, FileLikeObject } from 'ng2-file-upload';
+import * as firebase from 'firebase';
+
 @Component({
   selector: 'app-addrecipe',
   templateUrl: './addrecipe.component.html',
@@ -11,6 +14,8 @@ import { ActionSheetController } from '@ionic/angular';
 export class AddrecipeComponent implements OnInit {
 
   photos: any;
+  uploader: FileUploader = new FileUploader({});
+  public hasBaseDropZoneOver: boolean = false;
 
   constructor(private modalController: ModalController,
     public photoService: PhotoService, private actionSheetController: ActionSheetController) { }
@@ -54,6 +59,21 @@ export class AddrecipeComponent implements OnInit {
       }]
     });
     await actionSheet.present();
+  }
+
+  getFiles(): FileLikeObject[] {
+    return this.uploader.queue.map((fileItem) => {
+      return fileItem.file;
+    });
+  }
+
+  fileOverBase(ev): void {
+    this.hasBaseDropZoneOver = ev;
+  }
+
+  reorderFiles(reorderEvent: CustomEvent): void {
+    let element = this.uploader.queue.splice(reorderEvent.detail.from, 1)[0];
+    this.uploader.queue.splice(reorderEvent.detail.to, 0, element);
   }
 
 }

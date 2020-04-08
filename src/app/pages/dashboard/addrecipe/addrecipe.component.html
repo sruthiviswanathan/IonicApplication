@@ -9,27 +9,55 @@
 
 <ion-content>
   
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row>
     <ion-col size="6" 
       *ngFor="let photo of photoService.photos; index as position">
     <ion-img src="{{ photo.base64 ? photo.base64 : photo.webviewPath }}" (click)="showActionSheet(photo, position)"></ion-img>
     </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
+
+  <!--multi file upload-->
+  <div class="ion-margin ion-padding" ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader" class="drop-zone">
+    Upload pictures of your Recipe...
+  </div>
+  
+  <div class="file-input-container">
+    <ion-button>
+      <label>
+        <input type="file" id="file-uploader" ng2FileSelect [uploader]="uploader" multiple />
+        Add Files
+      </label>
+    </ion-button>
+  </div>
+  
+  <!-- <h2>Files: {{ uploader?.queue?.length }}</h2> -->
+  
+  <ion-list>
+    <ion-reorder-group (ionItemReorder)="reorderFiles($event)" disabled="false">
+      <ion-item *ngFor="let item of uploader.queue">
+        <ion-label>
+          {{ item?.file?.name }}
+        </ion-label>
+        <ion-reorder></ion-reorder>
+      </ion-item>
+    </ion-reorder-group>
+  </ion-list>
+  <!--multi file upload-->
 
   <form>
      <!--Upload pictures-->
-     <div class="ion-padding ion-margin">
+     <!-- <div class="ion-padding ion-margin">
       <ion-fab vertical="top" horizontal="center" slot="fixed">
         <ion-fab-button color="success" (click)="takeAPicture()">
           <ion-icon name="camera"></ion-icon>
         </ion-fab-button>
       </ion-fab>
-     </div>
-  
-     <ion-note class="upload-label" class="ion-margin ion-padding" color="success">Upload pictures of your Recipe<ion-text color="danger">*</ion-text></ion-note>
-    <div class="ion-margin">
+     </div> -->
+     <!-- <ion-note class="upload-label" class="ion-margin ion-padding" color="success">Upload pictures of your Recipe<ion-text color="danger">*</ion-text></ion-note> -->
+    
+     <div class="ion-margin">
     <ion-list lines="full" class="ion-margin ion-padding">
       <!--Name of the recipe-->
       <ion-item>
