@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertsComponent } from '../alerts/alerts.component';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginPage implements OnInit {
   user: any;
   showLoader: boolean;
   constructor(private authf: AngularFireAuth, private router: Router,
-    private alertController: AlertController, private loadingController: LoadingController) { }
+    private alertController: AlertController, private alertComponent: AlertsComponent) { }
 
   ngOnInit() {
   }
@@ -25,9 +26,9 @@ export class LoginPage implements OnInit {
     .then((response) => {
       this.user = response.user;
       localStorage.setItem('USER', JSON.stringify(this.user));
-      this.successAlert();
+      this.alertComponent.successAlert(this.user.displayName);
     }).catch((error) => {
-      this.errorAlert(error.code, error.message);
+      this.alertComponent.errorAlert(error.code, error.message);
     });
   }
 

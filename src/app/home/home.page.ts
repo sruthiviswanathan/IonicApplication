@@ -4,6 +4,8 @@ import { GoogleLoginProvider } from "angularx-social-login";
 import { Router } from '@angular/router';
 import {AlertController, ModalController} from '@ionic/angular';
 import { VideoPlayer } from '@ionic-native/video-player/ngx';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { auth } from 'firebase';
 
 @Component({
   selector: 'app-home',
@@ -21,18 +23,22 @@ export class HomePage {
 
   constructor(private authService: AuthService,
     private router: Router, private alertController: AlertController,
-    private videoPlayer: VideoPlayer, private modalController: ModalController) {}
+    private videoPlayer: VideoPlayer, private modalController: ModalController,
+    private authf: AngularFireAuth) {}
 
   async signInWithGoogle() {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((response) => {
         this.user = response;
         localStorage.setItem('USER', JSON.stringify(this.user));
-        // Hard Coded admin logic for development purpose
-        if (this.user.firstName == 'Sruthi') {
-          localStorage.setItem('ADMIN' , "true");
-        }
         this.presentAlert();
     })
+    // firebase googleSignIn..
+    // await this.authf.auth.signInWithPopup(new auth.GoogleAuthProvider())
+    // .then(response => {
+    //   console.log(response);
+    // }).catch(error => {
+    //   console.log(error);
+    // });
   }
 
   signInWithPinchOfYum() {
