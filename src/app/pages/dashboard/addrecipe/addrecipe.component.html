@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content> 
-  <form>
   <!-- <ion-grid>
     <ion-row>
     <ion-col size="6" 
@@ -55,32 +54,33 @@
       </ion-fab>
      </div> -->
      <!-- <ion-note class="upload-label" class="ion-margin ion-padding" color="success">Upload pictures of your Recipe<ion-text color="danger">*</ion-text></ion-note> -->
-    
+     <form #form="ngForm" (ngSubmit)="addNewRecipe(form)">
+
      <div class="ion-margin">
     <ion-list lines="full" class="ion-margin ion-padding">
       <!--Name of the recipe-->
       <ion-item>
         <ion-label position="floating">Name of the recipe<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="text"></ion-input>
+        <ion-input name="recipe" type="text" ngModel required></ion-input>
       </ion-item>
 
       <!--Ingredients required-->
       <ion-item>
         <ion-label position="floating">Ingredients Required<ion-text color="danger">*</ion-text></ion-label>
-        <ion-textarea></ion-textarea>
+        <ion-textarea name="ingredients" ngModel required></ion-textarea>
       </ion-item>
 
       <!--Method of preparation-->
       <ion-item>
         <ion-label position="floating">Method of Preparation<ion-text color="danger">*</ion-text></ion-label>
-        <ion-textarea></ion-textarea>
+        <ion-textarea name="method" ngModel required></ion-textarea>
       </ion-item>
     </ion-list>
     </div>
 
     <div class="ion-padding ion-margin">
-      <ion-button (click)="addNewRecipe()" color="success" class="ion-margin">ADD RECIPE</ion-button>
-      <ion-button (click)="reset()" color="danger" class="ion-margin">CLEAR</ion-button>
+      <ion-button type="submit" color="success" class="ion-margin">ADD RECIPE</ion-button>
+      <ion-button (click)="reset(form)" color="danger" class="ion-margin">CLEAR</ion-button>
     </div>
   </form>
 </ion-content>

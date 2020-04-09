@@ -2,9 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { PhotoService } from '../../../services/photo.service';
 import { ActionSheetController } from '@ionic/angular';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 import { FileUploader, FileLikeObject } from 'ng2-file-upload';
-import * as firebase from 'firebase';
+import { NgForm } from '@angular/forms';
+import { Recipe } from '../../../models/recipe';
+import { ToastService } from '../../../shared/services/toast.service';
 
 @Component({
   selector: 'app-addrecipe',
@@ -18,7 +21,10 @@ export class AddrecipeComponent implements OnInit {
   public hasBaseDropZoneOver: boolean = false;
 
   constructor(private modalController: ModalController,
-    public photoService: PhotoService, private actionSheetController: ActionSheetController) { }
+    public photoService: PhotoService,
+    private actionSheetController: ActionSheetController,
+    private fireStore: AngularFirestore,
+    public toastService: ToastService) { }
 
   ngOnInit() {
     
@@ -27,13 +33,18 @@ export class AddrecipeComponent implements OnInit {
   closeModal() {
     this.modalController.dismiss();
   }
-  addNewRecipe() {
-    console.log('Inside add new recipe function');
-    // fetch new recipe value.
+  
+  addNewRecipe(form: NgForm) {
+    const newRecipe: Recipe = new Recipe(form.value);
+    this.fireStore.collection('recipes').add({...newRecipe}).then(response => {
+      this.toastService.successToast('added your recipe');
+      form.resetForm();
+    }).catch(error => {
+      this.toastService.errorToast(error.message);
+    });
   }
-  reset() {
-    console.log('Inside reset');
-    // fetch new recipe value.
+  reset(form: NgForm) {
+      form.resetForm();
   }
   takeAPicture() {
     this.photoService.takeNewPhotoAndAddToGallery();

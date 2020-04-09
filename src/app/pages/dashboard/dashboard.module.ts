@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { DashboardPageRoutingModule } from './dashboard-routing.module';
 import { FileUploadModule } from 'ng2-file-upload';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 
 import { DashboardPage } from './dashboard.page';
@@ -26,6 +27,9 @@ import { AddrecipeComponent } from './addrecipe/addrecipe.component';
     CommonheaderComponent,
     RecipeComponent,
     AddrecipeComponent
+  ],
+  providers: [
+    AngularFirestore
   ]
 })
 export class DashboardPageModule {}
