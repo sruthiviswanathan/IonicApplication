@@ -10,11 +10,9 @@ import { AddrecipeComponent } from './addrecipe/addrecipe.component';
 })
 export class DashboardPage implements OnInit {
 
-  isAdminLoggedIn: string;
   constructor(private router: Router, private modalController: ModalController) { }
   
   ngOnInit() {
-    this.isAdminLoggedIn = localStorage.getItem('ADMIN');
   }
   goToRecipePage() {
     this.router.navigateByUrl('dashboard/recipe');
