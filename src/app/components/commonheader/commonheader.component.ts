@@ -14,8 +14,8 @@ export class CommonheaderComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.userPhoto = JSON.parse(localStorage.getItem('USER')).photoURL;
-    this.userName = JSON.parse(localStorage.getItem('USER')).displayName;
+    this.userPhoto = JSON.parse(localStorage.getItem('USER')).photoURL || JSON.parse(localStorage.getItem('USER')).photoUrl;
+    this.userName = JSON.parse(localStorage.getItem('USER')).displayName || JSON.parse(localStorage.getItem('USER')).firstName;
   }
 
   signOut() {
