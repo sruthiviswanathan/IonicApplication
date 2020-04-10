@@ -23,7 +23,7 @@
   </div>
   
   <div class="file-input-container">
-    <ion-button>
+    <ion-button color="success">
       <label>
         <input type="file" id="file-uploader" ng2FileSelect [uploader]="uploader" multiple />
         Add Files
@@ -75,6 +75,15 @@
         <ion-label position="floating">Method of Preparation<ion-text color="danger">*</ion-text></ion-label>
         <ion-textarea name="method" ngModel required></ion-textarea>
       </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Add tags to easily search your recipe later<ion-text color="danger">*</ion-text></ion-label>
+        <ion-note color="success">Eg: breakfast, quick-snack, etc..</ion-note>
+        <ion-textarea name="tagNames" type="text" (input)="tagNameCollector($event)" ngModel required>
+          <ion-chip color="success" *ngFor="let tag of tagNames">{{ tag }}</ion-chip>
+        </ion-textarea>
+      </ion-item>
+
     </ion-list>
     </div>
 

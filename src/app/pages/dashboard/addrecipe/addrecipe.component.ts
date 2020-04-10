@@ -16,6 +16,7 @@ import { ToastService } from '../../../shared/services/toast.service';
 })
 export class AddrecipeComponent implements OnInit {
 
+  tagNames: string[];
   photos: any;
   uploader: FileUploader = new FileUploader({});
   public hasBaseDropZoneOver: boolean = false;
@@ -24,7 +25,7 @@ export class AddrecipeComponent implements OnInit {
     public photoService: PhotoService,
     private actionSheetController: ActionSheetController,
     private fireStore: AngularFirestore,
-    public toastService: ToastService) { }
+    public toastService: ToastService) {}
 
   ngOnInit() {
     
@@ -48,6 +49,11 @@ export class AddrecipeComponent implements OnInit {
   }
   takeAPicture() {
     this.photoService.takeNewPhotoAndAddToGallery();
+  }
+
+  tagNameCollector(eventValue: any) {
+    let value = eventValue.target.value;
+    this.tagNames = value.split(',');
   }
 
   public async showActionSheet(photo, position) {
