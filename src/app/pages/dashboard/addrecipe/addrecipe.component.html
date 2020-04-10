@@ -14,24 +14,24 @@
     Upload pictures of your Recipe...
   </div>
   
+  <ion-progress-bar *ngIf="showProgress" color="primary" value="{{ uploadProgress }}"></ion-progress-bar>
+
   <div class="file-input-container">
     <ion-button>
       <label>
-        <input type="file" id="file-uploader" ng2FileSelect [uploader]="uploader" multiple />
+        <input type="file" id="file-uploader" (change)="uploadImage()" ng2FileSelect [uploader]="uploader" multiple />
         Add Files
       </label>
     </ion-button>
   </div>
   
   <ion-list>
-    <ion-reorder-group (ionItemReorder)="reorderFiles($event)" disabled="false">
       <ion-item *ngFor="let item of uploader.queue">
         <ion-label>
           {{ item?.file?.name }}
         </ion-label>
-        <ion-reorder></ion-reorder>
+        <ion-icon name="close-circle-outline" (click)="remove(item?.file?.name)"></ion-icon>
       </ion-item>
-    </ion-reorder-group>
   </ion-list>
   <!--multi file upload-->
 
@@ -47,9 +47,16 @@
              <ion-input name="recipe" type="text" ngModel required></ion-input>
            </ion-item>
      
+           <!--Description of the recipe-->
+           <ion-item>
+            <ion-label position="floating">Short description about the recipe<ion-text color="danger">*</ion-text></ion-label>
+            <ion-textarea name="description" ngModel required></ion-textarea>
+          </ion-item>
+
            <!--Ingredients required-->
            <ion-item>
-             <ion-label position="floating">Ingredients Required<ion-text color="danger">*</ion-text></ion-label>
+             <ion-label position="stacked">Ingredients Required<ion-text color="danger">*</ion-text></ion-label>
+             <ion-note color="primary">Please add a comma after each ingredient</ion-note>
              <ion-textarea name="ingredients" ngModel required></ion-textarea>
            </ion-item>
      
