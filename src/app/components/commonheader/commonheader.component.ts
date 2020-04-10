@@ -21,7 +21,9 @@ export class CommonheaderComponent implements OnInit {
   signOut() {
     this.authService.signOut().then((response) => {
       localStorage.clear();
-      this.router.navigateByUrl('/home');
+    }).catch(error => {
+      localStorage.clear();
     });
+    this.router.navigateByUrl('/home');
   }
 }
