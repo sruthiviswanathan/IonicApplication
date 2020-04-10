@@ -12,8 +12,9 @@ export class ToastService {
   public async successToast(successMessage: string) {
     const toast = await this.toastController.create({
       message: successMessage,
+      color: 'tertiary',
       duration: 3000,
-      position: 'top',
+      position: 'middle',
       buttons:[
         {
           icon: 'close',

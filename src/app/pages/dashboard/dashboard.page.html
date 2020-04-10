@@ -15,7 +15,7 @@
           <ion-card-content>
             Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
             <section>
-            <ion-button expand="block" fill="solid" color="success" (click)="goToRecipePage()">View Full Recipe</ion-button>
+            <ion-button expand="block" (click)="goToRecipePage()">View Full Recipe</ion-button>
           </section>
           </ion-card-content>
         </ion-card>
@@ -31,7 +31,7 @@
           <ion-card-content>
             Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
             <section>
-              <ion-button expand="block" fill="solid" color="success">View Full Recipe</ion-button>
+              <ion-button expand="block">View Full Recipe</ion-button>
             </section>
           </ion-card-content>
         </ion-card>
@@ -41,7 +41,7 @@
   </ion-grid>
 <!--Option to add new recipe only for admin-->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="danger" (click)="addNewRecipe()">
+    <ion-fab-button color="tertiary" (click)="addNewRecipe()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
