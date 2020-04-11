@@ -19,22 +19,30 @@ export class RegisterPage implements OnInit {
   }
 
   async register(form: NgForm) {
-    await this.authf.auth.createUserWithEmailAndPassword(form.value.email, form.value.password)
-    .then((response) => {
-       return response.user.updateProfile({
-         displayName: form.value.name,
-         // hardcoded photo url for development purpose.
-         photoURL: "https://cdn.iconscout.com/icon/free/png-256/avatar-372-456324.png"
-       }).then((result) => {
-        this.user = JSON.stringify(response.user);
-         localStorage.setItem('USER', this.user);
-         this.alertComponent.successAlert(form.value.name);
-       }).catch((error) => {
-        console.log(error);
+    if (form.valid) {
+        if (form.value.password && form.value.confirm) {
+      await this.authf.auth.createUserWithEmailAndPassword(form.value.email, form.value.password)
+      .then((response) => {
+        return response.user.updateProfile({
+          displayName: form.value.name,
+          // hardcoded photo url for development purpose.
+          photoURL: "https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png"
+        }).then((result) => {
+          this.user = JSON.stringify(response.user);
+          localStorage.setItem('USER', this.user);
+          this.alertComponent.successAlert(form.value.name);
+        }).catch((error) => {
+          console.log(error);
+          this.alertComponent.errorAlert(error.code, error.message);
+        });
+      }).catch((error) => {
         this.alertComponent.errorAlert(error.code, error.message);
-       });
-    }).catch((error) => {
-      this.alertComponent.errorAlert(error.code, error.message);
-    });
+      });
+      } else {
+        this.alertComponent.errorAlert('Password Mismatch', 'Make sure password and confirm password matches');        
+      }
+    } else {
+      this.alertComponent.errorAlert('Missing Fields', 'Please fill out all the fields');
+    }
   }
 }

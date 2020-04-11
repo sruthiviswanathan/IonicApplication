@@ -21,15 +21,19 @@ export class LoginPage implements OnInit {
   }
 
  async login(form: NgForm) {
-   this.showLoader= true;
-    this.authf.auth.signInWithEmailAndPassword(form.value.email, form.value.password)
-    .then((response) => {
-      this.user = response.user;
-      localStorage.setItem('USER', JSON.stringify(this.user));
-      this.alertComponent.successAlert(this.user.displayName);
-    }).catch((error) => {
-      this.alertComponent.errorAlert(error.code, error.message);
-    });
+    if(form.valid) {
+      this.showLoader= true;
+      this.authf.auth.signInWithEmailAndPassword(form.value.email, form.value.password)
+      .then((response) => {
+        this.user = response.user;
+        localStorage.setItem('USER', JSON.stringify(this.user));
+        this.alertComponent.successAlert(this.user.displayName);
+      }).catch((error) => {
+        this.alertComponent.errorAlert(error.code, error.message);
+      });
+    } else {
+        this.alertComponent.errorAlert('Missing fields', 'Please fill out email and password');
+    }
   }
 
   async successAlert() {

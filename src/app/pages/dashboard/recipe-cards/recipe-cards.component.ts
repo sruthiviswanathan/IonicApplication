@@ -38,7 +38,6 @@ export class RecipeCardsComponent implements OnInit {
           this.listOfRecipes.push(result.payload.doc.data());
         });
     });
-    // console.log(this.listOfRecipes);
   }
 
 }

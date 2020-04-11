@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { PhotoService } from '../../../services/photo.service';
 import { ActionSheetController } from '@ionic/angular';
 
@@ -33,7 +33,7 @@ export class AddrecipeComponent implements OnInit {
 
   constructor(private modalController: ModalController,
     public photoService: PhotoService,
-    private actionSheetController: ActionSheetController,
+    private alertController: AlertController,
     private fireStore: AngularFirestore,
     public toastService: ToastService,
     private storage: AngularFireStorage) {}
@@ -47,16 +47,28 @@ export class AddrecipeComponent implements OnInit {
   }
   
   async addNewRecipe(form: NgForm) {
-    const newRecipe: Recipe = new Recipe(form.value, this.recipeImages, this.tagNames);
-    this.fireStore.collection('recipes').doc(newRecipe.id).set({...newRecipe})
-    .then(response => {
-      this.toastService.successToast('added your recipe');
-      this.tagNames = [];
-      this.recipeImages = [];
-      form.resetForm();
-    }).catch(error => {
-      this.toastService.errorToast(error.message);
-    });
+    if (form.valid) {
+      if (this.recipeImages.length != 0) {
+        let finalTags: Array<any> = [];
+        for(let i=0; i< this.tagNames.length ; i++) {
+          finalTags.push(this.tagNames[i].trim().toLowerCase());
+        } 
+        const newRecipe: Recipe = new Recipe(form.value, this.recipeImages, finalTags);
+        this.fireStore.collection('recipes').doc(newRecipe.id).set({...newRecipe})
+        .then(response => {
+          this.toastService.successToast('Successfully added your recipe!!');
+          this.tagNames = [];
+          this.recipeImages = [];
+          form.resetForm();
+        }).catch(error => {
+          this.toastService.errorToast(error.message);
+        });
+      } else {
+          this.alertPopUp('OOPS! Something went wrong', 'Upload at least one image');
+      }
+    } else {
+      this.alertPopUp('OOPS! Something went wrong','Please fill out all the fields');
+    }
   }
 
 
@@ -106,6 +118,22 @@ export class AddrecipeComponent implements OnInit {
     if(index > -1){
       this.uploader.queue.splice(index, 1);
     }
+  }
+
+  async alertPopUp(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            // do nothing
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

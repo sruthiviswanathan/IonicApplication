@@ -15,6 +15,7 @@ import { RecipeComponent} from '../dashboard/recipe/recipe.component'
 import { AddrecipeComponent } from './addrecipe/addrecipe.component';
 import { RecipeCardsComponent } from '../dashboard/recipe-cards/recipe-cards.component';
 import { TrendingComponent } from '../dashboard/trending/trending.component';
+import { SearchComponent } from '../dashboard/search/search.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { TrendingComponent } from '../dashboard/trending/trending.component';
     RecipeComponent,
     AddrecipeComponent,
     RecipeCardsComponent,
-    TrendingComponent
+    TrendingComponent,
+    SearchComponent
   ],
   providers: [
     AngularFirestore,

@@ -7,6 +7,7 @@ import { AddrecipeComponent } from './addrecipe/addrecipe.component';
 import { RecipeCardsComponent } from './recipe-cards/recipe-cards.component';
 import { RecipeComponent } from './recipe/recipe.component';
 import { TrendingComponent } from './trending/trending.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,15 @@ const routes: Routes = [
           path: '',
           component: RecipeCardsComponent,
           canActivate: [AuthGuard]
-      }
+      },
+      { path: 'search', children: [
+        {
+          path: '',
+          component: SearchComponent,
+          canActivate: [AuthGuard]
+        }
+      ] 
+    }
     ]
   },
   {

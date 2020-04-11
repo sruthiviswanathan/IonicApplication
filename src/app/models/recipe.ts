@@ -10,7 +10,7 @@ export class Recipe {
 
     constructor(recipe: Recipe, images: Array<string>, tagNames: Array<string>) {
         this.id = uuidv4();
-        this.recipe = recipe.recipe;
+        this.recipe = recipe.recipe.toLowerCase();
         this.description = recipe.description;
         this.ingredients = recipe.ingredients;
         this.method = recipe.method;
