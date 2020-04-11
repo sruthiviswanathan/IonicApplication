@@ -29,45 +29,10 @@ export class LoginPage implements OnInit {
         localStorage.setItem('USER', JSON.stringify(this.user));
         this.alertComponent.successAlert(this.user.displayName);
       }).catch((error) => {
-        this.alertComponent.errorAlert(error.code, error.message);
+        this.alertComponent.errorAlert(error.code, error.message, '/login');
       });
     } else {
-        this.alertComponent.errorAlert('Missing fields', 'Please fill out email and password');
+        this.alertComponent.errorAlert('Missing fields', 'Please fill out email and password', '/login');
     }
-  }
-
-  async successAlert() {
-    const alert = await this.alertController.create({
-      header: 'Welcome to Pinch of Yum!',
-      subHeader: 'Continue as ' + JSON.parse(localStorage.getItem('USER')).displayName,
-      message: 'Explore easy and tasty recipes!!!',
-      buttons: [
-        {
-          text: 'OK',
-          handler: () => {
-            this.router.navigateByUrl('dashboard');
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async errorAlert(code: string, errorMessage: string) {
-    const alert = await this.alertController.create({
-      header: 'OOPS Something went wrong!',
-      subHeader: code,
-      message: errorMessage,
-      buttons: [
-        {
-          text: 'OK',
-          handler: () => {
-            this.router.navigateByUrl('/login');
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
+ }
 }

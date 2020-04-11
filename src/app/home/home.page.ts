@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { AuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { Router } from '@angular/router';
-import {AlertController, ModalController} from '@ionic/angular';
-import { VideoPlayer } from '@ionic-native/video-player/ngx';
+import { AlertController } from '@ionic/angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { auth } from 'firebase';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +19,18 @@ export class HomePage {
   };
 
   user:any
+  sweetRecipes: Array<any> = [];
+  breakfastRecipes: Array<any> = [];
 
   constructor(private authService: AuthService,
     private router: Router, private alertController: AlertController,
-    private videoPlayer: VideoPlayer, private modalController: ModalController,
-    private authf: AngularFireAuth) {}
+    private authf: AngularFireAuth, private firestore: AngularFirestore) {}
+
+  ngOnInit() {
+    this.user = localStorage.getItem('USER');
+    this.getSweetRecipes();
+    this.getBreakfastRecipes();
+  }
 
   async signInWithGoogle() {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((response) => {
@@ -49,16 +55,33 @@ export class HomePage {
     this.router.navigateByUrl('login');
   }
 
-  goToPage() {
+  getSweetRecipes() {
+    this.firestore.collection('recipes', ref => ref.where('tags', 'array-contains', 'sweet'))
+    .valueChanges()
+    .subscribe(value => {
+      value.forEach(val => {
+        this.sweetRecipes.push(val);
+      });
+    });
+  }
+
+  getBreakfastRecipes() {
+    this.firestore.collection('recipes', ref => ref.where('tags', 'array-contains', 'breakfast'))
+    .valueChanges()
+    .subscribe(value => {
+      value.forEach(val => {
+        this.breakfastRecipes.push(val);
+      });
+    });
+  }
+
+  goToRecipePage(id: any) {
     if(this.user) {
-      this.router.navigateByUrl('dashboard');
+      this.router.navigate(['dashboard/recipe'], {queryParams: { id: id}});
     } else {
-      this.signInWithGoogle();
-      this.router.navigateByUrl('/');      
+      this.router.navigateByUrl('login');      
     }
 }
-
-
 
   async presentAlert() {
     const alert = await this.alertController.create({

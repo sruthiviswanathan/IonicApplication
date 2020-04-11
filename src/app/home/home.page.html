@@ -9,48 +9,40 @@
 
 <ion-content fullscreen class="ion-padding">
 
-      <ion-toolbar>
-        <ion-title>Tasty and Simple Recipes</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="signInWithPinchOfYum()"><ion-icon name="restaurant-outline"></ion-icon>SignUp</ion-button>
-          <ion-button (click)="login()"><ion-icon name="restaurant-outline"></ion-icon>Login</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
+  <ion-toolbar color="light">
+    <ion-img style="width: 120px; height: 150px;" src="../assets/icon/logo.png"></ion-img>
+    <ion-buttons slot="end">
+      <ion-button (click)="signInWithPinchOfYum()"><ion-icon name="restaurant-outline"></ion-icon>SignUp</ion-button>
+      <ion-button (click)="login()"><ion-icon name="restaurant-outline"></ion-icon>Login</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+ <ion-toolbar color="light">
+  <ion-title color="primary" class="ion-text-center">
+    Sweets
+  </ion-title>
+ </ion-toolbar>
 
   <ion-slides pager=true [options]="slideOpts">
-  <ion-slide>
-    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-  </ion-slide>
-  <ion-slide>
-    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-  </ion-slide>
-  <ion-slide>
-    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-  </ion-slide>
-</ion-slides>
+    <ion-slide *ngFor="let recipe of sweetRecipes">
+      <ion-card>
+       <img src="{{ recipe.images[0] }}" (click)="goToRecipePage(recipe.id)"/>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 
-<ion-slides pager=true [options]="slideOpts">
-  <ion-slide>
-    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-  </ion-slide>
-  <ion-slide>
-    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-  </ion-slide>
-  <ion-slide>
-    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-  </ion-slide>
-</ion-slides>
+  <ion-toolbar color="light">
+    <ion-title color="primary" class="ion-text-center">
+      Quick and Easy Breakfasts
+    </ion-title>
+   </ion-toolbar>
 
-<ion-slides pager=true [options]="slideOpts">
-  <ion-slide>
-    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-  </ion-slide>
-  <ion-slide>
-    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-  </ion-slide>
-  <ion-slide>
-    <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-  </ion-slide>
-</ion-slides>
+  <ion-slides pager=true [options]="slideOpts">
+    <ion-slide *ngFor="let recipe of breakfastRecipes">
+      <ion-card>
+        <img src="{{ recipe.images[0] }}" (click)="goToRecipePage(recipe.id)"/>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 
 </ion-content>

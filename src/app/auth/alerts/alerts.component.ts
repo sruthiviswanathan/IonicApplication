@@ -31,7 +31,7 @@ export class AlertsComponent implements OnInit {
     await alert.present();
   }
 
-  async errorAlert(code: string, errorMessage: string) {
+  async errorAlert(code: string, errorMessage: string, page?: string) {
     const alert = await this.alertController.create({
       header: 'OOPS Something went wrong!',
       subHeader: code,
@@ -40,7 +40,7 @@ export class AlertsComponent implements OnInit {
         {
           text: 'OK',
           handler: () => {
-            this.router.navigateByUrl('/register');
+            this.router.navigateByUrl( page || '/register');
           }
         }
       ]
