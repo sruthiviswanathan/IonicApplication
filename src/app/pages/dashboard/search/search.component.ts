@@ -26,7 +26,8 @@ export class SearchComponent implements OnInit {
       }
   }
 
-  fetchRecipesBasedOnInput(query:any) {
+  fetchRecipesBasedOnInput(keyword:any) {
+        let query = keyword.toLowerCase();
         this.firestore.collection('recipes', ref => ref.where('recipe', '==', query)).valueChanges()
         .subscribe(value => {
           value.forEach(val => {
