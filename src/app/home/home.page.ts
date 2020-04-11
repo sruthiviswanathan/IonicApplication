@@ -18,6 +18,7 @@ export class HomePage {
     speed: 400
   };
 
+  localStorage = localStorage;
   user:any
   sweetRecipes: Array<any> = [];
   breakfastRecipes: Array<any> = [];
@@ -67,7 +68,7 @@ export class HomePage {
           text: 'OK',
           handler: () => {
             console.log('Confirm OK!!');
-            this.router.navigateByUrl('dashboard');
+            this.router.navigateByUrl('dashboard/main');
           }
         }
       ]

@@ -23,7 +23,7 @@ export class AlertsComponent implements OnInit {
         {
           text: 'OK',
           handler: () => {
-            this.router.navigateByUrl('dashboard');
+            this.router.navigateByUrl('dashboard/main');
           }
         }
       ]
