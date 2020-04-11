@@ -14,6 +14,14 @@
       </ion-slide>
     </ion-slides>
  
+    <!--Description-->
+    <ion-toolbar>
+      <ion-title>Description::</ion-title>
+    </ion-toolbar>
+    <p class="ion-margin">
+      {{ fullRecipe.description }}
+    </p>
+
     <!--List of Ingredients-->
     <ion-toolbar>
       <ion-title>Ingredients Required::</ion-title>
@@ -26,6 +34,6 @@
       <ion-title>Method of Preparation::</ion-title>
     </ion-toolbar>
     <p class="ion-margin">
-      {{ method }}
+      {{ fullRecipe.method }}
     </p>
 </ion-content>

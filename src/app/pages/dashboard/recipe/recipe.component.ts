@@ -13,7 +13,6 @@ export class RecipeComponent implements OnInit {
   fullRecipe: any = {};
   images: any;
   ingredients: string[] = [];
-  method: any;
   isPageReady: boolean;
 
   constructor(private route: ActivatedRoute,
@@ -34,10 +33,9 @@ export class RecipeComponent implements OnInit {
         this.fullRecipe = value.data();
         this.images = this.fullRecipe.images;
         this.ingredients = this.fullRecipe.ingredients.split(',');
-        this.method = this.fullRecipe.method;
         this.isPageReady = true;
     }).catch(function(error) {
-      console.log(error);
+        console.log(error);
     });
   }
 

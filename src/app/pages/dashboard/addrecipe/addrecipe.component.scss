@@ -8,8 +8,8 @@ ion-note {
 }
 
 .drop-zone { 
-    background-color: #f6f6f6;
-    border: dotted 3px #dedddd; 
+    background-color: var(--ion-color-light);
+    border: dotted 3px var(--ion-color-medium); 
     height: 20vh;
     display: flex;
     align-items: center;

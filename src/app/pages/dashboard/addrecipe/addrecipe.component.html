@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Add a New Recipe</ion-title>
       <ion-buttons slot="end">
-        <ion-button color="tertiary" (click)="closeModal()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+        <ion-button color="secondary" (click)="closeModal()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -78,7 +78,7 @@
          </div>
      
          <div class="buttons">
-           <ion-button slot="end" type="submit" color="primary" class="ion-margin">ADD RECIPE</ion-button>
+           <ion-button slot="end" type="submit" class="ion-margin">ADD RECIPE</ion-button>
            <ion-button slot="end" (click)="reset(form)" color="danger" class="ion-margin">CLEAR</ion-button>
          </div>
        </form>
