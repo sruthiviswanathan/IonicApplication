@@ -28,8 +28,6 @@ export class HomePage {
 
   ngOnInit() {
     this.user = localStorage.getItem('USER');
-    this.getSweetRecipes();
-    this.getBreakfastRecipes();
   }
 
   async signInWithGoogle() {
@@ -37,14 +35,7 @@ export class HomePage {
         this.user = response;
         localStorage.setItem('USER', JSON.stringify(this.user));
         this.presentAlert();
-    })
-    // firebase googleSignIn..
-    // await this.authf.auth.signInWithPopup(new auth.GoogleAuthProvider())
-    // .then(response => {
-    //   console.log(response);
-    // }).catch(error => {
-    //   console.log(error);
-    // });
+    });
   }
 
   signInWithPinchOfYum() {
@@ -55,33 +46,9 @@ export class HomePage {
     this.router.navigateByUrl('login');
   }
 
-  getSweetRecipes() {
-    this.firestore.collection('recipes', ref => ref.where('tags', 'array-contains', 'sweet'))
-    .valueChanges()
-    .subscribe(value => {
-      value.forEach(val => {
-        this.sweetRecipes.push(val);
-      });
-    });
+  search(keyword: string) {
+    this.router.navigate(['dashboard/search'], {queryParams: { keyword: keyword}});
   }
-
-  getBreakfastRecipes() {
-    this.firestore.collection('recipes', ref => ref.where('tags', 'array-contains', 'breakfast'))
-    .valueChanges()
-    .subscribe(value => {
-      value.forEach(val => {
-        this.breakfastRecipes.push(val);
-      });
-    });
-  }
-
-  goToRecipePage(id: any) {
-    if(this.user) {
-      this.router.navigate(['dashboard/recipe'], {queryParams: { id: id}});
-    } else {
-      this.router.navigateByUrl('login');      
-    }
-}
 
   async presentAlert() {
     const alert = await this.alertController.create({

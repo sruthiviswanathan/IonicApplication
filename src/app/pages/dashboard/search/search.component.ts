@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireList } from 'angularfire2/database';
 import { IonItemSliding } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -11,12 +11,20 @@ import { Router } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
+  searchByKeyword: string;
   recipeList: AngularFireList<any>;
   ifSearchResultsReady: boolean;
   filteredResults: Array<any> = [];
-  constructor(private firestore: AngularFirestore, private router: Router) {}
+  constructor(private firestore: AngularFirestore, private router: Router,
+    private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.queryParams.subscribe(value => {
+      this.searchByKeyword = value.keyword;
+      console.log(this.searchByKeyword);
+      this.fetchRecipesBasedOnInput(this.searchByKeyword);
+  });
+  }
 
   async onEnterEventHandler(event: any) {
       // on enter
@@ -27,6 +35,7 @@ export class SearchComponent implements OnInit {
   }
 
   fetchRecipesBasedOnInput(keyword:any) {
+        this.filteredResults = [];
         let query = keyword.toLowerCase();
         this.firestore.collection('recipes', ref => ref.where('recipe', '==', query)).valueChanges()
         .subscribe(value => {
