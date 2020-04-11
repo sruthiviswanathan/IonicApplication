@@ -1,6 +1,6 @@
 <ion-searchbar placeholder="Enter a keyword to search..." (keypress)= "onEnterEventHandler($event)">
 </ion-searchbar>
-
+<ion-content>
 <ion-grid *ngIf="ifSearchResultsReady && filteredResults.length > 0 ; else emptyGrid">
   <ion-row>
     <ion-col>
@@ -37,3 +37,4 @@
 </ion-row>
 </ion-grid>
 </ng-template>
+</ion-content>
