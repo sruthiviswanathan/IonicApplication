@@ -17,29 +17,29 @@ export class DashboardPage implements OnInit {
     private modalController: ModalController,
     private firestore: AngularFirestore) { }
   
-  listOfRecipes: Array<any> = [];
+  // listOfRecipes: Array<any> = [];
 
   ngOnInit() {
-    this.getAllRecipes();
+    // this.getAllRecipes();
   }
   
-  goToRecipePage(id: string) {
-    this.router.navigate(['dashboard/recipe'], {queryParams: { id: id}});
-  }
+  // goToRecipePage(id: string) {
+  //   this.router.navigate(['dashboard/recipe'], {queryParams: { id: id}});
+  // }
 
-  addNewRecipe() {
-    this.modalController.create({component: AddrecipeComponent}).then((modalElement)=> {
-      modalElement.present();
-    })
-  }
+  // addNewRecipe() {
+  //   this.modalController.create({component: AddrecipeComponent}).then((modalElement)=> {
+  //     modalElement.present();
+  //   })
+  // }
 
-  getAllRecipes() {
-    this.firestore.collection('recipes').snapshotChanges()
-    .subscribe(results => {
-        results.map(result => {
-          this.listOfRecipes.push(result.payload.doc.data());
-        });
-    });
+  // getAllRecipes() {
+  //   this.firestore.collection('recipes').snapshotChanges()
+  //   .subscribe(results => {
+  //       results.map(result => {
+  //         this.listOfRecipes.push(result.payload.doc.data());
+  //       });
+  //   });
     // console.log(this.listOfRecipes);
-  }
+  // }
 }

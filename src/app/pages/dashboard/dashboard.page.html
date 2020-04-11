@@ -3,30 +3,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let recipe of listOfRecipes" size-xs="12" size-sm="12" size-md="6" size-lg="3">
-        <ion-card>
-          <img src="{{ recipe.images[0] }}"/>
-          <ion-card-header>
-            <ion-card-subtitle>{{ recipe.tags[0] }}</ion-card-subtitle>
-            <ion-card-title>{{ recipe.recipe }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content class="recipe-desc">
-            {{ recipe.description }}
-          </ion-card-content>
-          <ion-footer class="card-footer">
-            <ion-button color="secondary" expand="block" (click)="goToRecipePage(recipe.id)">View Full Recipe</ion-button>
-          </ion-footer>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="search">
+        <ion-label>Search</ion-label>
+        <ion-icon name="search"></ion-icon>
+      </ion-tab-button>
 
-  <!--Option to add new recipe-->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="warning" (click)="addNewRecipe()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+      <ion-tab-button tab="main">
+        <ion-label>Dashboard</ion-label>
+        <ion-icon name="restaurant-outline"></ion-icon>
+      </ion-tab-button>
+
+      <ion-tab-button tab="trending">
+        <ion-label>Trending</ion-label>
+        <ion-icon name="trending-up-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
