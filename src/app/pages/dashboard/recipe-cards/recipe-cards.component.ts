@@ -28,7 +28,8 @@ export class RecipeCardsComponent implements OnInit {
   addNewRecipe() {
     this.modalController.create({component: AddrecipeComponent}).then((modalElement)=> {
       modalElement.present();
-    })
+    });
+    this.listOfRecipes = [];
   }
 
   getAllRecipes() {
@@ -39,7 +40,7 @@ export class RecipeCardsComponent implements OnInit {
           this.listOfRecipes.push(result.payload.doc.data());
         });
     });
-    this.listOfRecipes = [...new Set(this.listOfRecipes)]; 
+    this.listOfRecipes = [...new Set(this.listOfRecipes)];
   }
 
 }
