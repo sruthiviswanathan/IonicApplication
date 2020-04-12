@@ -3,46 +3,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="3">
-        <ion-card>
-          <img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg" />
-          <ion-card-header>
-            <ion-card-subtitle>Destination</ion-card-subtitle>
-            <ion-card-title>Madison, WI</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
-            <section>
-            <ion-button expand="block" fill="solid" color="success" (click)="goToRecipePage()">View Full Recipe</ion-button>
-          </section>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="search">
+        <ion-label>Search</ion-label>
+        <ion-icon name="search"></ion-icon>
+      </ion-tab-button>
 
-      <ion-col size-xs="12" size-sm="12" size-md="6" size-lg="3">
-        <ion-card>
-          <img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg" />
-          <ion-card-header>
-            <ion-card-subtitle>Destination</ion-card-subtitle>
-            <ion-card-title>Madison, WI</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
-            <section>
-              <ion-button expand="block" fill="solid" color="success">View Full Recipe</ion-button>
-            </section>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+      <ion-tab-button tab="main">
+        <ion-label>Dashboard</ion-label>
+        <ion-icon name="restaurant-outline"></ion-icon>
+      </ion-tab-button>
 
-    </ion-row>
-  </ion-grid>
-<!--Option to add new recipe only for admin-->
-  <ion-fab *ngIf="isAdminLoggedIn" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="danger" (click)="addNewRecipe()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+      <ion-tab-button tab="trending">
+        <ion-label>Trending</ion-label>
+        <ion-icon name="trending-up-outline"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>

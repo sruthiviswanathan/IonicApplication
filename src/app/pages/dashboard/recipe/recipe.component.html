@@ -2,38 +2,44 @@
   <app-commonheader></app-commonheader>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="isPageReady">
   <!--Name of the recipe-->
-    <ion-toolbar>
-    <ion-title>Name of Dish</ion-title>
+    <ion-toolbar color="tertiary">
+    <ion-title class="recipe-name ion-text-center">{{ fullRecipe.recipe }}</ion-title>
     </ion-toolbar>
     <!--Images provided-->
     <ion-slides pager=true>
-      <ion-slide>
-        <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-      </ion-slide>
-      <ion-slide>
-        <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
-      </ion-slide>
-      <ion-slide>
-        <ion-img src="https://images-gmi-pmc.edge-generalmills.com/72a236a8-83ae-4d06-90ad-68f66d39f1f2.jpg"></ion-img>
+      <ion-slide *ngFor = "let image of images">
+        <ion-img src="{{ image }}"></ion-img>
       </ion-slide>
     </ion-slides>
-    <!--List of Ingredients-->
-    <ion-toolbar>
-      <ion-title>Ingredients Required::</ion-title>
-    </ion-toolbar>
-    <ion-list>
-      <ion-item>1kg wheat flour</ion-item>
-      <ion-item>1kg Rice flour</ion-item>
-      <ion-item>1kg all purpose flour</ion-item>
-      <ion-item>salt as required</ion-item>
-    </ion-list>
-    <!--Method-->
-    <ion-toolbar>
-      <ion-title>Method of Preparation::</ion-title>
+ 
+    <!--Description-->
+    <ion-toolbar color="tertiary">
+      <ion-title>About</ion-title>
     </ion-toolbar>
     <p class="ion-margin">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      {{ fullRecipe.description }}
     </p>
+
+    <!--List of Ingredients-->
+    <ion-toolbar color="tertiary">
+      <ion-title>Ingredients Required</ion-title>
+    </ion-toolbar>
+    <ion-list>
+      <ion-item *ngFor="let item of ingredients">
+        <ion-icon slot="start" name="pricetag-outline" color="primary"></ion-icon>
+        {{ item }}
+      </ion-item>
+    </ion-list>
+    <!--Method-->
+    <ion-toolbar color="tertiary">
+      <ion-title>Method of Preparation</ion-title>
+    </ion-toolbar>
+    <p class="ion-margin">
+      {{ fullRecipe.method }}
+    </p>
+    <ion-toolbar color="tertiary">
+      <ion-chip color="primary" *ngFor="let tag of fullRecipe.tags" (click)="searchByKeyword(tag)">{{ tag }}</ion-chip>
+    </ion-toolbar>
 </ion-content>

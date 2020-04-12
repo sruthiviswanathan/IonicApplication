@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
-import { AddrecipeComponent } from './addrecipe/addrecipe.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,18 +7,8 @@ import { AddrecipeComponent } from './addrecipe/addrecipe.component';
 })
 export class DashboardPage implements OnInit {
 
-  isAdminLoggedIn: string;
-  constructor(private router: Router, private modalController: ModalController) { }
+  constructor() { }
   
-  ngOnInit() {
-    this.isAdminLoggedIn = localStorage.getItem('ADMIN');
-  }
-  goToRecipePage() {
-    this.router.navigateByUrl('dashboard/recipe');
-  }
-  addNewRecipe() {
-    this.modalController.create({component: AddrecipeComponent}).then((modalElement)=> {
-      modalElement.present();
-    })
-  }
+  ngOnInit() {}
+  
 }

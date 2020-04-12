@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { AuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { Router } from '@angular/router';
-import {AlertController, ModalController} from '@ionic/angular';
-import { VideoPlayer } from '@ionic-native/video-player/ngx';
+import { AlertController } from '@ionic/angular';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
   selector: 'app-home',
@@ -17,22 +18,25 @@ export class HomePage {
     speed: 400
   };
 
+  localStorage = localStorage;
   user:any
+  sweetRecipes: Array<any> = [];
+  breakfastRecipes: Array<any> = [];
 
   constructor(private authService: AuthService,
     private router: Router, private alertController: AlertController,
-    private videoPlayer: VideoPlayer, private modalController: ModalController) {}
+    private authf: AngularFireAuth, private firestore: AngularFirestore) {}
+
+  ngOnInit() {
+    this.user = localStorage.getItem('USER');
+  }
 
   async signInWithGoogle() {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((response) => {
         this.user = response;
         localStorage.setItem('USER', JSON.stringify(this.user));
-        // Hard Coded admin logic for development purpose
-        if (this.user.firstName == 'Sruthi') {
-          localStorage.setItem('ADMIN' , "true");
-        }
         this.presentAlert();
-    })
+    });
   }
 
   signInWithPinchOfYum() {
@@ -43,16 +47,13 @@ export class HomePage {
     this.router.navigateByUrl('login');
   }
 
-  goToPage() {
-    if(this.user) {
-      this.router.navigateByUrl('dashboard');
+  search(keyword: string) {
+    if (localStorage.getItem('USER')) {
+    this.router.navigate(['dashboard/search'], {queryParams: { keyword: keyword}});
     } else {
-      this.signInWithGoogle();
-      this.router.navigateByUrl('/');      
+      this.router.navigateByUrl('login');
     }
-}
-
-
+  }
 
   async presentAlert() {
     const alert = await this.alertController.create({
@@ -71,7 +72,7 @@ export class HomePage {
           text: 'OK',
           handler: () => {
             console.log('Confirm OK!!');
-            this.router.navigateByUrl('dashboard');
+            this.router.navigateByUrl('dashboard/main');
           }
         }
       ]

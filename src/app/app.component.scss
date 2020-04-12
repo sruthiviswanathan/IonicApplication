@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #b2ff59;
+  background-color: var(--ion-color-primary);
 }
 
 ion-title {
@@ -17,8 +17,8 @@ ion-title {
   width: 100%;
   height: 100%;
   text-align: center;
-  color: #ffffff;
-  background-color: #b2ff59;
+  color: var(--ion-color-secondary);
+  background-color: var(--ion-color-primary);
 }
 ion-title {
   .title {
@@ -29,7 +29,7 @@ ion-title {
 .spinner {
   width: 40px;
   height: 40px;
-  background-color: #ffffff;
+  background-color: var(--ion-color-secondary);
 
   margin: 100px auto;
   -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;

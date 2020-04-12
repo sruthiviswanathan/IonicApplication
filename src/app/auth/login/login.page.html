@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar color="success">
-    <ion-title>Login to Pinch of Yum</ion-title>
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Login to Pinch of Yum</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -24,8 +24,11 @@
               </ion-item>
             </div>
             <div class="ion-margin ion-padding">
-              <ion-button color="success" type="submit" expand="block">Login<ion-icon name="restaurant-outline" slot="end"></ion-icon>
+              <ion-button type="submit" expand="block">Login<ion-icon name="restaurant-outline" slot="end"></ion-icon>
               </ion-button>
+            </div>
+            <div class="ion-margin ion-padding">
+              <ion-text class="ion-text-center">Don't have an account? <a [routerLink]="['/register']">SignIn</a> here..</ion-text>
             </div>
           </ion-col>
         </ion-row>

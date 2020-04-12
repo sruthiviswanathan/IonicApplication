@@ -1,0 +1,28 @@
+<ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col *ngFor="let recipe of listOfRecipes" size-xs="12" size-sm="12" size-md="6" size-lg="3">
+      <ion-card>
+        <img src="{{ recipe.images[0] }}"/>
+        <ion-card-header>
+          <ion-card-subtitle>{{ recipe.tags[0] }}</ion-card-subtitle>
+          <ion-card-title>{{ recipe.recipe }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content class="recipe-desc">
+          {{ recipe.description }}
+        </ion-card-content>
+        <ion-footer class="card-footer">
+          <ion-button color="secondary" expand="block" (click)="goToRecipePage(recipe.id)">View Full Recipe</ion-button>
+        </ion-footer>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<!--Option to add new recipe-->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button color="primary" (click)="addNewRecipe()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+</ion-content>

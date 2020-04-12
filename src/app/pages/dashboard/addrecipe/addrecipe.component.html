@@ -1,87 +1,89 @@
 <ion-header>
-  <ion-toolbar color="success">
+  <ion-toolbar>
     <ion-title>Add a New Recipe</ion-title>
       <ion-buttons slot="end">
-        <ion-button color="dark" (click)="closeModal()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+        <ion-button color="light" (click)="closeModal()"><ion-icon name="close-circle-outline"></ion-icon></ion-button>
       </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  
-  <!-- <ion-grid>
-    <ion-row>
-    <ion-col size="6" 
-      *ngFor="let photo of photoService.photos; index as position">
-    <ion-img src="{{ photo.base64 ? photo.base64 : photo.webviewPath }}" (click)="showActionSheet(photo, position)"></ion-img>
-    </ion-col>
-    </ion-row>
-  </ion-grid> -->
+<ion-content> 
 
   <!--multi file upload-->
   <div class="ion-margin ion-padding" ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)" [uploader]="uploader" class="drop-zone">
     Upload pictures of your Recipe...
   </div>
   
+  <ion-progress-bar *ngIf="showProgress" color="primary" value="{{ uploadProgress }}"></ion-progress-bar>
+
   <div class="file-input-container">
     <ion-button>
       <label>
-        <input type="file" id="file-uploader" ng2FileSelect [uploader]="uploader" multiple />
+        <input type="file" id="file-uploader" (change)="uploadImage()" ng2FileSelect [uploader]="uploader" multiple />
         Add Files
       </label>
     </ion-button>
   </div>
   
-  <!-- <h2>Files: {{ uploader?.queue?.length }}</h2> -->
-  
   <ion-list>
-    <ion-reorder-group (ionItemReorder)="reorderFiles($event)" disabled="false">
       <ion-item *ngFor="let item of uploader.queue">
         <ion-label>
           {{ item?.file?.name }}
         </ion-label>
-        <ion-reorder></ion-reorder>
+        <ion-icon name="close-circle-outline" (click)="remove(item?.file?.name)"></ion-icon>
       </ion-item>
-    </ion-reorder-group>
   </ion-list>
   <!--multi file upload-->
 
-  <form>
-     <!--Upload pictures-->
-     <!-- <div class="ion-padding ion-margin">
-      <ion-fab vertical="top" horizontal="center" slot="fixed">
-        <ion-fab-button color="success" (click)="takeAPicture()">
-          <ion-icon name="camera"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-     </div> -->
-     <!-- <ion-note class="upload-label" class="ion-margin ion-padding" color="success">Upload pictures of your Recipe<ion-text color="danger">*</ion-text></ion-note> -->
-    
-     <div class="ion-margin">
-    <ion-list lines="full" class="ion-margin ion-padding">
-      <!--Name of the recipe-->
-      <ion-item>
-        <ion-label position="floating">Name of the recipe<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="text"></ion-input>
-      </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <form #form="ngForm" (ngSubmit)="addNewRecipe(form)">
+          <div class="ion-margin ion-padding">
+         <ion-list lines="full">
+           <!--Name of the recipe-->
+           <ion-item>
+             <ion-label position="floating">Name of the recipe<ion-text color="danger">*</ion-text></ion-label>
+             <ion-input name="recipe" type="text" ngModel required></ion-input>
+           </ion-item>
+     
+           <!--Description of the recipe-->
+           <ion-item>
+            <ion-label position="floating">Short description about the recipe<ion-text color="danger">*</ion-text></ion-label>
+            <ion-textarea name="description" ngModel required></ion-textarea>
+          </ion-item>
 
-      <!--Ingredients required-->
-      <ion-item>
-        <ion-label position="floating">Ingredients Required<ion-text color="danger">*</ion-text></ion-label>
-        <ion-textarea></ion-textarea>
-      </ion-item>
+           <!--Ingredients required-->
+           <ion-item>
+             <ion-label position="stacked">Ingredients Required<ion-text color="danger">*</ion-text></ion-label>
+             <ion-note color="primary">Please add a comma after each ingredient</ion-note>
+             <ion-textarea name="ingredients" ngModel required></ion-textarea>
+           </ion-item>
+     
+           <!--Method of preparation-->
+           <ion-item>
+             <ion-label position="floating">Method of Preparation<ion-text color="danger">*</ion-text></ion-label>
+             <ion-textarea name="method" ngModel required></ion-textarea>
+           </ion-item>
+     
+           <ion-item>
+             <ion-label position="stacked">Add tags to easily search your recipe later<ion-text color="danger">*</ion-text></ion-label>
+             <ion-note color="primary">Eg: breakfast, quick-snack, etc..</ion-note>
+             <ion-textarea name="tagNames" type="text" (input)="tagNameCollector($event)" ngModel required>
+               <ion-chip color="secondary" *ngFor="let tag of tagNames">{{ tag }}</ion-chip>
+             </ion-textarea>
+           </ion-item>
+     
+         </ion-list>
+         </div>
+     
+         <div class="buttons">
+           <ion-button slot="end" type="submit" class="ion-margin">ADD RECIPE</ion-button>
+           <ion-button slot="end" (click)="reset(form)" color="secondary" class="ion-margin">CLEAR</ion-button>
+         </div>
+       </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
-      <!--Method of preparation-->
-      <ion-item>
-        <ion-label position="floating">Method of Preparation<ion-text color="danger">*</ion-text></ion-label>
-        <ion-textarea></ion-textarea>
-      </ion-item>
-    </ion-list>
-    </div>
-
-    <div class="ion-padding ion-margin">
-      <ion-button (click)="addNewRecipe()" color="success" class="ion-margin">ADD RECIPE</ion-button>
-      <ion-button (click)="reset()" color="danger" class="ion-margin">CLEAR</ion-button>
-    </div>
-  </form>
 </ion-content>

@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { LoginPageRoutingModule } from './login-routing.module';
-
+import { AlertsComponent } from '../alerts/alerts.component';
 import { LoginPage } from './login.page';
 
 @NgModule({
@@ -15,6 +15,7 @@ import { LoginPage } from './login.page';
     IonicModule,
     LoginPageRoutingModule
   ],
-  declarations: [LoginPage]
+  declarations: [LoginPage],
+  providers: [AlertsComponent]
 })
 export class LoginPageModule {}

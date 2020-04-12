@@ -2,14 +2,46 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardPage } from './dashboard.page';
-import { RecipeComponent } from './recipe/recipe.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { AddrecipeComponent } from './addrecipe/addrecipe.component';
+import { RecipeCardsComponent } from './recipe-cards/recipe-cards.component';
+import { RecipeComponent } from './recipe/recipe.component';
+import { TrendingComponent } from './trending/trending.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardPage
+    component: DashboardPage,
+    children: [
+      { path: 'trending', children: [
+        {
+          path: '',
+          component: TrendingComponent,
+          canActivate: [AuthGuard]
+        }
+      ] },
+      { path: 'main', children: [
+        {
+          path: '',
+          component: RecipeCardsComponent,
+          canActivate: [AuthGuard]
+        }
+      ] },
+      { 
+          path: '',
+          component: RecipeCardsComponent,
+          canActivate: [AuthGuard]
+      },
+      { path: 'search', children: [
+        {
+          path: '',
+          component: SearchComponent,
+          canActivate: [AuthGuard]
+        }
+      ] 
+    }
+    ]
   },
   {
     path: 'recipe',
