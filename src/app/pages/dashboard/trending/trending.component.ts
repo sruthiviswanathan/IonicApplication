@@ -27,11 +27,13 @@ export class TrendingComponent implements OnInit {
   }
 
   getAllRecipes() {
+    this.listOfRecipes = [];
     this.firestore.collection('recipes').snapshotChanges()
     .subscribe(results => {
         results.map(result => {
           this.listOfRecipes.push(result.payload.doc.data());
         });
     });
+    this.listOfRecipes = [...new Set(this.listOfRecipes)];
   }
 }
