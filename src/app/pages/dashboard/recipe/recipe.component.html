@@ -4,7 +4,7 @@
 
 <ion-content *ngIf="isPageReady">
   <!--Name of the recipe-->
-    <ion-toolbar color="light">
+    <ion-toolbar color="tertiary">
     <ion-title class="recipe-name ion-text-center">{{ fullRecipe.recipe }}</ion-title>
     </ion-toolbar>
     <!--Images provided-->
@@ -15,7 +15,7 @@
     </ion-slides>
  
     <!--Description-->
-    <ion-toolbar color="light">
+    <ion-toolbar color="tertiary">
       <ion-title>About</ion-title>
     </ion-toolbar>
     <p class="ion-margin">
@@ -23,14 +23,17 @@
     </p>
 
     <!--List of Ingredients-->
-    <ion-toolbar>
+    <ion-toolbar color="tertiary">
       <ion-title>Ingredients Required</ion-title>
     </ion-toolbar>
     <ion-list>
-      <ion-item *ngFor="let item of ingredients">{{ item }}</ion-item>
+      <ion-item *ngFor="let item of ingredients">
+        <ion-icon slot="start" name="pricetag-outline" color="primary"></ion-icon>
+        {{ item }}
+      </ion-item>
     </ion-list>
     <!--Method-->
-    <ion-toolbar>
+    <ion-toolbar color="tertiary">
       <ion-title>Method of Preparation</ion-title>
     </ion-toolbar>
     <p class="ion-margin">

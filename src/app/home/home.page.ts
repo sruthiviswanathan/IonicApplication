@@ -48,7 +48,11 @@ export class HomePage {
   }
 
   search(keyword: string) {
+    if (localStorage.getItem('USER')) {
     this.router.navigate(['dashboard/search'], {queryParams: { keyword: keyword}});
+    } else {
+      this.router.navigateByUrl('login');
+    }
   }
 
   async presentAlert() {

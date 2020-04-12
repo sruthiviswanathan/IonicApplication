@@ -1,4 +1,4 @@
-<ion-searchbar placeholder="Enter a keyword to search..." (keypress)= "onEnterEventHandler($event)">
+<ion-searchbar [(ngModel)]="searchValue" placeholder="Enter a keyword to search..." (keypress)= "onEnterEventHandler($event)">
 </ion-searchbar>
 <ion-content>
 <ion-grid *ngIf="ifSearchResultsReady && filteredResults.length > 0 ; else emptyGrid">

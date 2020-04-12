@@ -11,6 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class SearchComponent implements OnInit {
 
+  searchValue: string;
   searchByKeyword: string;
   recipeList: AngularFireList<any>;
   ifSearchResultsReady: boolean;
@@ -22,6 +23,7 @@ export class SearchComponent implements OnInit {
     this.route.queryParams.subscribe(value => {
       this.searchByKeyword = value.keyword;
       console.log(this.searchByKeyword);
+      this.searchValue = this.searchByKeyword;
       this.fetchRecipesBasedOnInput(this.searchByKeyword);
   });
   }
