@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 @Component({
@@ -16,7 +16,8 @@ export class RecipeComponent implements OnInit {
   isPageReady: boolean;
 
   constructor(private route: ActivatedRoute,
-     private firestore: AngularFirestore) { }
+     private firestore: AngularFirestore,
+     private router: Router) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(value => {
@@ -39,5 +40,8 @@ export class RecipeComponent implements OnInit {
     });
   }
 
+  searchByKeyword(keyword: string) {
+    this.router.navigate(['dashboard/search'], {queryParams: { keyword: keyword}});
+  }
 
 }

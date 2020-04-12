@@ -39,4 +39,7 @@
     <p class="ion-margin">
       {{ fullRecipe.method }}
     </p>
+    <ion-toolbar color="tertiary">
+      <ion-chip color="primary" *ngFor="let tag of fullRecipe.tags" (click)="searchByKeyword(tag)">{{ tag }}</ion-chip>
+    </ion-toolbar>
 </ion-content>

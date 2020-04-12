@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(value => {
       this.searchByKeyword = value.keyword;
-      console.log(this.searchByKeyword);
+      // console.log(this.searchByKeyword);
       this.searchValue = this.searchByKeyword;
       this.fetchRecipesBasedOnInput(this.searchByKeyword);
   });
@@ -52,6 +52,7 @@ export class SearchComponent implements OnInit {
           value.forEach(val => {
             this.filteredResults.push(val);
           });
+          this.filteredResults = [...new Set(this.filteredResults)]; 
           this.ifSearchResultsReady = true;
         });
     }
