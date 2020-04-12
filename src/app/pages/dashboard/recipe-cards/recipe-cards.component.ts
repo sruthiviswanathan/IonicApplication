@@ -32,6 +32,7 @@ export class RecipeCardsComponent implements OnInit {
   }
 
   getAllRecipes() {
+    this.listOfRecipes = [];
     this.firestore.collection('recipes').snapshotChanges()
     .subscribe(results => {
         results.map(result => {
