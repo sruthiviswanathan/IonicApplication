@@ -33,25 +33,8 @@ export class TrendingComponent implements OnInit {
     .subscribe(results => {
         results.map(result => {
           this.listOfRecipes.push(result.payload.doc.data());
-
-          // making the list unique
-          let mymap = new Map();
-          let unique = this.listOfRecipes.filter(el => { 
-              const val = mymap.get(el.recipe); 
-              if(val) { 
-                  if(el.id < val) { 
-                      mymap.delete(el.recipe); 
-                      mymap.set(el.recipe, el.id); 
-                      return true; 
-                  } else { 
-                      return false; 
-                  } 
-              } 
-              mymap.set(el.recipe, el.id); 
-              return true; 
-          });
+          let unique = [...new Map(this.listOfRecipes.map(item => [item['id'], item])).values()];
           this.finalListOfRecipes = unique;
-
         });
     });
   }
