@@ -1,7 +1,7 @@
 <ion-content>
 <ion-grid>
   <ion-row>
-    <ion-col *ngFor="let recipe of listOfRecipes" size-xs="12" size-sm="12" size-md="6" size-lg="3">
+    <ion-col *ngFor="let recipe of finalListOfRecipes" size-xs="12" size-sm="12" size-md="6" size-lg="3">
       <ion-card>
         <img src="{{ recipe.images[0] }}"/>
         <ion-card-header>

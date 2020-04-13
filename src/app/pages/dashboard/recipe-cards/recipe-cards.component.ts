@@ -16,6 +16,7 @@ export class RecipeCardsComponent implements OnInit {
     private firestore: AngularFirestore) { }
   
   listOfRecipes: Array<any> = [];
+  finalListOfRecipes: Array<any> = [];
 
   ngOnInit() {
     this.getAllRecipes();
@@ -29,18 +30,33 @@ export class RecipeCardsComponent implements OnInit {
     this.modalController.create({component: AddrecipeComponent}).then((modalElement)=> {
       modalElement.present();
     });
-    this.getAllRecipes();
   }
 
   getAllRecipes() {
-    this.listOfRecipes = [];
     this.firestore.collection('recipes').snapshotChanges()
     .subscribe(results => {
         results.map(result => {
           this.listOfRecipes.push(result.payload.doc.data());
+
+          // making the list unique
+          let mymap = new Map();
+          let unique = this.listOfRecipes.filter(el => { 
+              const val = mymap.get(el.recipe); 
+              if(val) { 
+                  if(el.id < val) { 
+                      mymap.delete(el.recipe); 
+                      mymap.set(el.recipe, el.id); 
+                      return true; 
+                  } else { 
+                      return false; 
+                  } 
+              } 
+              mymap.set(el.recipe, el.id); 
+              return true; 
+          });
+          this.finalListOfRecipes = unique;
         });
     });
-    this.listOfRecipes = [...new Set(this.listOfRecipes)];
   }
 
 }

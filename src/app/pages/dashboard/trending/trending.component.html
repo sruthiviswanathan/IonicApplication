@@ -3,7 +3,7 @@
   <ion-row>
     <ion-col>
       <ion-list>
-        <ion-item-sliding #slidingItem *ngFor="let recipe of listOfRecipes">
+        <ion-item-sliding #slidingItem *ngFor="let recipe of finalListOfRecipes">
           <ion-item>
             <ion-avatar slot="start">
               <img src="{{ recipe.images[0] }}">
