@@ -29,7 +29,7 @@ export class RecipeCardsComponent implements OnInit {
     this.modalController.create({component: AddrecipeComponent}).then((modalElement)=> {
       modalElement.present();
     });
-    this.listOfRecipes = [];
+    this.getAllRecipes();
   }
 
   getAllRecipes() {
